@@ -1,7 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { HistoryService } from './history.service';
 import { Dns } from '../schema/dns.schema';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiOkResponse } from '@nestjs/swagger';
+import { BadRequestExceptionSto } from 'src/app.dto';
 
 @Controller()
 export class HistoryController {
@@ -12,10 +13,11 @@ export class HistoryController {
    * @Method GET
    * @returns Dns[]
    */
-  @ApiResponse({
+  @ApiOkResponse({
     type: [Dns],
     description: 'latest 20 lookup api call success results',
   })
+  @ApiBadRequestResponse({ type: BadRequestExceptionSto })
   @Get()
   async getLatestHistories(): Promise<Dns[]> {
     return this.historyService.getLatestHistories();

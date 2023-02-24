@@ -1,7 +1,28 @@
-import { Controller, Get, Post, Query, Ip, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Query,
+  Ip,
+  Body,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
+import {
+  ApiBadRequestResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiProperty,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { ToolsService } from './tools.service';
-import { IPv4ValidationDTO, IPv4InputDTO } from '../app.dto';
-import { ApiQuery, ApiResponse } from '@nestjs/swagger';
+import {
+  IPv4ValidationDTO,
+  IpAddressesDTO,
+  NotFoundExceptionSto,
+  BadRequestExceptionSto,
+} from '../app.dto';
+import { Dns } from '../schema/dns.schema';
 
 @Controller()
 export class ToolsController {
@@ -12,15 +33,17 @@ export class ToolsController {
    * @Method GET
    * @param domainName: string
    * @param ip: string
-   * @returns string[]
+   * @returns Dns
    */
   @ApiQuery({ name: 'domain', type: String })
-  @ApiResponse({ type: [String], description: 'ip addresses of ddomain name' })
+  @ApiOkResponse({ type: Dns })
+  @ApiBadRequestResponse({ type: BadRequestExceptionSto })
+  @ApiNotFoundResponse({ type: NotFoundExceptionSto })
   @Get('lookup')
   async lookup(
     @Query('domain') domainName: string,
     @Ip() ip,
-  ): Promise<string[]> {
+  ): Promise<Dns | BadRequestException | NotFoundException> {
     return this.toolsService.lookupDomain(domainName, ip);
   }
 
@@ -31,8 +54,12 @@ export class ToolsController {
    * @returns IPv4ValidationDTO
    */
   @Post('validate')
-  @ApiResponse({ type: IPv4ValidationDTO })
-  validate(@Body() input: IPv4InputDTO): IPv4ValidationDTO {
+  @ApiProperty({ type: IpAddressesDTO })
+  @ApiOkResponse({ type: IPv4ValidationDTO })
+  @ApiBadRequestResponse({ type: BadRequestExceptionSto })
+  validate(
+    @Body() input: IpAddressesDTO,
+  ): IPv4ValidationDTO | BadRequestException {
     return this.toolsService.isIPv4(input);
   }
 }

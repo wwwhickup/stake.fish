@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { appVersion } from './app.dto';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiOkResponse } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
@@ -12,7 +12,7 @@ export class AppController {
    * @Method GET
    * @returns appVersion
    */
-  @ApiResponse({ type: appVersion })
+  @ApiOkResponse({ type: appVersion })
   @Get()
   getVersion(): appVersion {
     return this.appService.getVersion();
