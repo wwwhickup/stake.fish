@@ -20,13 +20,17 @@ export class HealthController {
   @HealthCheck()
   check() {
     return this.health.check([
+      // Database check
       () => this.db.pingCheck('database'),
+      // disk storage check
       () =>
         this.disk.checkStorage('storage', {
-          path: 'D:/',
+          path: '/app',
           thresholdPercent: 0.5,
         }),
+      // heap memory size 0.5G
       () => this.memory.checkHeap('memory_heap', 512 * 1024 * 1024),
+      // rss momory size 0.5G
       () => this.memory.checkRSS('memory_rss', 512 * 1024 * 1024),
     ]);
   }
