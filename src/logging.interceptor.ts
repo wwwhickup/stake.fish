@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 
+// App logger
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
   private readonly logger = new Logger(LoggingInterceptor.name);
@@ -25,6 +26,7 @@ export class LoggingInterceptor implements NestInterceptor {
     const { ip, method, path: url } = request;
     const correlationKey = uuidv4();
 
+    // App Http request logger
     this.logger.log(
       `[${correlationKey}] ${method} ${url} ${userAgent} ${ip}: ${
         context.getClass().name
@@ -38,7 +40,7 @@ export class LoggingInterceptor implements NestInterceptor {
 
         const { statusCode } = response;
         const contentLength = response.get('content-length');
-
+        // App Http response logger
         this.logger.log(
           `[${correlationKey}] ${method} ${url} ${statusCode} ${contentLength}: ${
             Date.now() - now

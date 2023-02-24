@@ -5,6 +5,7 @@ import { HealthController } from './health.controller';
 
 @Module({
   imports: [
+    // initiate Terminus
     TerminusModule.forRoot({
       errorLogStyle: 'pretty',
     }),

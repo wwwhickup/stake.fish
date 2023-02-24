@@ -7,6 +7,11 @@ import { ApiResponse } from '@nestjs/swagger';
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
 
+  /**
+   * @Route /v1/history
+   * @Method GET
+   * @returns Dns[]
+   */
   @ApiResponse({
     type: [Dns],
     description: 'latest 20 lookup api call success results',

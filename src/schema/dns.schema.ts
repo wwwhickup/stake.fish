@@ -3,6 +3,7 @@ import { ApiResponseProperty } from '@nestjs/swagger';
 
 export type DnsDocument = Dns & Document;
 
+// dns lookup result schema
 @Schema({ timestamps: true })
 export class Dns {
   @Prop()

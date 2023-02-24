@@ -8,6 +8,10 @@ export class AppService {
   constructor(private readonly configService: ConfigService) {
     this.appVersion = this.configService.get('app.version');
   }
+
+  /**
+   * @returns appVersion
+   */
   getVersion(): appVersion {
     const res = {
       version: this.appVersion,

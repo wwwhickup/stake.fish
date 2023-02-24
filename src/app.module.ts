@@ -15,17 +15,21 @@ import { configSchemaValidation } from './config/config.schema';
 
 @Module({
   imports: [
+    // initiate Prometheus metrics
     PrometheusModule.register(),
+    // initiate nestjs config
     ConfigModule.forRoot({
       isGlobal: true,
       load: Object.values(Configs),
       envFilePath: '.env',
       validationSchema: configSchemaValidation,
     }),
+    // MongoDB connect
     MongooseModule.forRoot(process.env.DATABASE_URI),
     HistoryModule,
     ToolsModule,
     IndexingModule,
+    // Nested route
     RouterModule.register([
       {
         path: 'v1',
@@ -42,6 +46,7 @@ import { configSchemaValidation } from './config/config.schema';
         ],
       },
     ]),
+    // Nestjs Terminus health check module
     HealthModule,
   ],
   controllers: [AppController],

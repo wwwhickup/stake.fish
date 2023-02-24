@@ -7,6 +7,13 @@ import { ApiQuery, ApiResponse } from '@nestjs/swagger';
 export class ToolsController {
   constructor(private readonly toolsService: ToolsService) {}
 
+  /**
+   * @Route /v1/tools/lookup?domain=***
+   * @Method GET
+   * @param domainName: string
+   * @param ip: string
+   * @returns string[]
+   */
   @ApiQuery({ name: 'domain', type: String })
   @ApiResponse({ type: [String], description: 'ip addresses of ddomain name' })
   @Get('lookup')
@@ -17,6 +24,12 @@ export class ToolsController {
     return this.toolsService.lookupDomain(domainName, ip);
   }
 
+  /**
+   * @Route /v1/tools/validate
+   * @Method POST
+   * @param input: IPv4ValidationDTO
+   * @returns IPv4ValidationDTO
+   */
   @Post('validate')
   @ApiResponse({ type: IPv4ValidationDTO })
   validate(@Body() input: IPv4InputDTO): IPv4ValidationDTO {
