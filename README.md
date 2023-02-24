@@ -31,7 +31,9 @@ I have provided a `docker-compose` file to help you setup project. The docker-co
 
 Before starting, please ensure you have [docker-compose](https://docs.docker.com/compose/) and [Docker](https://www.docker.com/) installed on your system.
 
-- Run your environment with `docker-compose up -d` or `yarn docker-compose:dev`.
+- Run application with `docker-compose up -d --build` or `yarn docker-compose:start`.
+
+- Run application in development environment with `docker-compose up -build` or `yarn docker-compose:dev`.
 
 - Run test with `yarn test` or `yarn docker-compose:test`.
 
