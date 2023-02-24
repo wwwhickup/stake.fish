@@ -19,7 +19,7 @@ export class HistoryService {
     // query for latest ${historylimit} history
     return this.DnsModel.find()
       .limit(this.historyLimit)
-      .sort({ createdAt: -1 })
-      .select({ createdAt: 0, updatedAt: 0, _id: 0, __v: 0 });
+      .sort({ created_at: -1 })
+      .select({ _id: 0, __v: 0 });
   }
 }
