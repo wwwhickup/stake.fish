@@ -24,15 +24,6 @@ Please ensure the service starts on port 3000 and your REST API has an access lo
 
 If possible, please make sure the OpenAPI/Swagger is available so we can generate a client for your service (not mandatory).
 
-## Development environment
-
-Create a fully Dockerized development environment using Docker and Docker Compose. Also, ensure all services and tools are included in the Docker Compose definition and that everything starts in the correct order and initializes correctly (migrations, etc.). We should be able to run everything with a simple:
-
-```
-docker-compose up -d --build
-```
-
-The Dockerfile and Docker Compose files should be available in the root directory of your project.
 
 ## Environment Setup
 
@@ -40,16 +31,17 @@ I have provided a `docker-compose` file to help you setup project. The docker-co
 
 Before starting, please ensure you have [docker-compose](https://docs.docker.com/compose/) and [Docker](https://www.docker.com/) installed on your system.
 
-Run your environment with `docker-compose up -d` or `yarn docker-compose:dev`.
-Run test with `yarn test` or `yarn docker-compose:test`
+- Run your environment with `docker-compose up -d` or `yarn docker-compose:dev`.
 
-To check the status of the containers, run `docker-compose ps`.
+- Run test with `yarn test` or `yarn docker-compose:test`.
 
-To check the logs of the containers, run `docker-compose logs -f`.
+- To check the status of the containers, run `docker-compose ps`.
 
-You can browse the MongoExress interface at `http://localhost:8081`. You will need the `root` password to access. The password can be found in the `docker-compose.yml` file under `MONGO_INITDB_ROOT_PASSWORD`
+- To check the logs of the containers, run `docker-compose logs -f`.
 
-You can brows swagger document at `http://localhost:3000/api` and you will see 6 defined endpoints as follow the challange
+- You can browse the MongoExress interface at `http://localhost:8081`. You will need the `root` password to access. The password can be found in the `docker-compose.yml` file under `MONGO_INITDB_ROOT_PASSWORD`
+
+- You can brows swagger document at `http://localhost:3000/api` and you will see 6 defined endpoints as follow the challange
 <img width="1474" alt="Screenshot at Feb 24 07-36-48" src="https://user-images.githubusercontent.com/54128071/221192187-49fa7e6e-2e4b-4fd7-b0c2-336fa4d7c90f.png">
 
 
