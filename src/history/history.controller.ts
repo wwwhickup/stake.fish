@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { HistoryService } from './history.service';
 import { Dns } from '../schema/dns.schema';
 import { ApiBadRequestResponse, ApiOkResponse } from '@nestjs/swagger';
-import { BadRequestExceptionSto } from 'src/app.dto';
+import { BadRequestExceptionSto } from '../app.dto';
 
 @Controller()
 export class HistoryController {
