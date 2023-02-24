@@ -16,6 +16,11 @@ export class HealthController {
     private readonly memory: MemoryHealthIndicator,
   ) {}
 
+  /**
+   * @Route /health
+   * @Method GET
+   * @returns Object
+   */
   @Get()
   @HealthCheck()
   check() {
